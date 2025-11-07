@@ -14,7 +14,7 @@ JOB_CONTENT=$1
 
 echo "'${JOB_CONTENT}'"
 
-
+# 变量使用单引号避免转义，因此变量内部需避免使用单引号
 PARAMS="\
 -Djob_content='${JOB_CONTENT}'\
 "
@@ -22,6 +22,4 @@ PARAMS="\
 echo $PARAMS
 
 # 执行DataX任务，并通过 -p 参数传递变量（包括使用默认值的变量）
-# reader.mysql.columns="id,name" -> "id","name"
-# writer.file.columns="id,name" -> "id","name"
 ${PYTHON_LAUNCHER} ${DATAX_LAUNCHER} --jvm="-Xms1G -Xmx1G" --loglevel="debug" -p "${PARAMS}" ${JOB_JSON}
