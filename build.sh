@@ -73,11 +73,37 @@ if ! command -v unzip >/dev/null 2>&1; then
     sudo apt-get update && sudo apt-get install -y unzip
 fi
 
-echo "解压到 $TMP_DIR ..."
-unzip -o "$ZIPFILE" -d "$TMP_DIR"
-echo "解压完成，列出解压目录内容:"
-ls -la "$TMP_DIR"
+# 先解压到临时目录，再把 zip 包中第一级目录下的所有文件/目录平移（移动）到 $TMP_DIR 下，
+# 以去掉 zip 包的根目录层级。
+EXTRACT_TMP="$(mktemp -d)"
+trap 'rm -rf "$EXTRACT_TMP"' EXIT
 
+echo "解压到临时目录: $EXTRACT_TMP ..."
+unzip -q -o "$ZIPFILE" -d "$EXTRACT_TMP"
+
+# 如果存在单一顶级目录，则把该目录下的内容移到 TMP_DIR；
+# 否则将 EXTRACT_TMP 下的所有顶级条目移动到 TMP_DIR（达到去掉根目录的效果）。
+shopt -s dotglob nullglob
+entries=( "$EXTRACT_TMP"/* )
+if [ ${#entries[@]} -eq 1 ] && [ -d "${entries[0]}" ]; then
+    src="${entries[0]}"
+    echo "检测到单一顶级目录: ${src##*/}，将其内容移动到 $TMP_DIR"
+    for item in "$src"/* "$src"/.[!.]* "$src"/..?*; do
+        [ -e "$item" ] || continue
+        mv -f "$item" "$TMP_DIR"/
+    done
+else
+    echo "存在多个顶级条目或直接文件，移动解压临时目录下的所有顶级条目到 $TMP_DIR"
+    for item in "$EXTRACT_TMP"/* "$EXTRACT_TMP"/.[!.]* "$EXTRACT_TMP"/..?*; do
+        [ -e "$item" ] || continue
+        mv -f "$item" "$TMP_DIR"/
+    done
+fi
+shopt -u dotglob nullglob
+
+rm -rf "$EXTRACT_TMP"
+echo "解压并平移完成，列出 $TMP_DIR 内容:"
+ls -la "$TMP_DIR"
 
 # 构建 docker 镜像（以工作区根目录为构建上下文）
 IMAGE_TAG="dolphinscheduler:${VERSION}-py-datax-aliyunpan-${ARCH}"
