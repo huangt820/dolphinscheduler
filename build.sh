@@ -110,4 +110,6 @@ IMAGE_TAG="dolphinscheduler:${VERSION}-standalone-py-datax-aliyunpan-${ARCH}"
 echo "开始构建镜像: $IMAGE_TAG 使用 Dockerfile: $DOCKERFILE"
 sudo docker build -t "$IMAGE_TAG" -f "$DOCKERFILE" .
 
+rm -rf "$TMP_DIR"
+
 echo "构建完成: $IMAGE_TAG"
