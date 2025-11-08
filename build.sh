@@ -106,7 +106,7 @@ echo "解压并平移完成，列出 $TMP_DIR 内容:"
 ls -la "$TMP_DIR"
 
 # 构建 docker 镜像（以工作区根目录为构建上下文）
-IMAGE_TAG="dolphinscheduler:${VERSION}-py-datax-aliyunpan-${ARCH}"
+IMAGE_TAG="dolphinscheduler:${VERSION}-standalone-py-datax-aliyunpan-${ARCH}"
 echo "开始构建镜像: $IMAGE_TAG 使用 Dockerfile: $DOCKERFILE"
 docker build -t "$IMAGE_TAG" -f "$DOCKERFILE" .
 
