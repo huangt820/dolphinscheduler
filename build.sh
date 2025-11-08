@@ -47,9 +47,9 @@ if [ ! -f "$DOCKERFILE" ]; then
     exit 4
 fi
 
-# 解压 aliyunpan 目录下的 amd|arm zip 到 ./tmp/aliyunpan/
+# 解压 aliyunpan 目录下的 amd|arm zip 到 ./yunpan/aliyunpan/
 
-TMP_DIR="./tmp/aliyunpan"
+TMP_DIR="./yunpan/aliyunpan"
 echo "准备临时目录: $TMP_DIR"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
@@ -104,7 +104,6 @@ shopt -u dotglob nullglob
 rm -rf "$EXTRACT_TMP"
 echo "解压并平移完成，列出 $TMP_DIR 内容:"
 ls -la "$TMP_DIR"
-chmod -R 755 "$TMP_DIR"
 
 # 构建 docker 镜像（以工作区根目录为构建上下文）
 IMAGE_TAG="dolphinscheduler:${VERSION}-standalone-py-datax-aliyunpan-${ARCH}"
