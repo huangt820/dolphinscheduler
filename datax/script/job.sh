@@ -22,4 +22,4 @@ PARAMS="\
 echo $PARAMS
 
 # 执行DataX任务，并通过 -p 参数传递变量（包括使用默认值的变量）
-${PYTHON_LAUNCHER} ${DATAX_LAUNCHER} --jvm="-Xms512M -Xmx512M" --loglevel="debug" -p "${PARAMS}" ${JOB_JSON}
+${PYTHON_LAUNCHER} ${DATAX_LAUNCHER} --jvm="-Xms512M -Xmx512M" --loglevel="info" -p "${PARAMS}" ${JOB_JSON}
