@@ -6,7 +6,7 @@ RUN apt-get update && sudo apt-get install -y python3 && rm -rf /var/lib/apt/lis
 
 # 安装aliyunpan同步工具
 RUN mkdir -p /opt/aliyunpan
-COPY /tmp/dolphinscheduler/build/image/aliyunpan /opt/aliyunpan
+COPY /tmp/aliyunpan /opt/aliyunpan
 
 # 安装dataX
 RUN mkdir -p /opt/datax/script
