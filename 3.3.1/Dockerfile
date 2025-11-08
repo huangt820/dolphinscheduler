@@ -6,11 +6,11 @@ RUN apt-get update && sudo apt-get install -y python3 && rm -rf /var/lib/apt/lis
 
 # 安装aliyunpan同步工具
 RUN mkdir -p /opt/aliyunpan
-COPY /tmp/aliyunpan /opt/aliyunpan
+COPY ./tmp/aliyunpan /opt/aliyunpan
 
 # 安装dataX
 RUN mkdir -p /opt/datax/script
-COPY ../datax /opt/datax
+COPY ./datax /opt/datax
 
 WORKDIR /opt/dolphinscheduler
 
@@ -19,7 +19,7 @@ RUN mkdir -p ./.mvn/wrapper
 COPY ./3.3.1/mvn/wrapper ./.mvn/wrapper/
 
 # 安装插件
-COPY ../libs/mysql-connector-j-9.4.0.jar ./standalone-server/libs/
+COPY ./libs/mysql-connector-j-9.4.0.jar ./standalone-server/libs/
 COPY ./3.3.1/plugins ./plugins
 
 # 禁用90%负载保护机制

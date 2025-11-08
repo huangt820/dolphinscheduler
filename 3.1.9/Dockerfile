@@ -6,16 +6,16 @@ RUN apt-get update && sudo apt-get install -y python3 && rm -rf /var/lib/apt/lis
 
 # 安装aliyunpan同步工具
 RUN mkdir -p /opt/aliyunpan
-COPY /tmp/aliyunpan /opt/aliyunpan
+COPY ./tmp/aliyunpan /opt/aliyunpan
 
 # 安装dataX
 RUN mkdir -p /opt/datax/script
-COPY ../datax /opt/datax
+COPY ./datax /opt/datax
 
 WORKDIR /opt/dolphinscheduler
 
 # 安装插件
-COPY ../libs/mysql-connector-j-9.4.0.jar ./libs/standalone-server/
+COPY ./libs/mysql-connector-j-9.4.0.jar ./libs/standalone-server/
 
 # 环境变量
 ENV PYTHON_LAUNCHER=/usr/bin/python3
