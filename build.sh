@@ -53,7 +53,6 @@ TMP_DIR="./tmp/aliyunpan"
 echo "准备临时目录: $TMP_DIR"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
-chmod 755 $TMP_DIR
 
 # 在 workspace 根目录下的 aliyunpan 目录中查找包含 amd|arm 的 zip 文件
 if [ ! -d "./aliyunpan" ]; then
