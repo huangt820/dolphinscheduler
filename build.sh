@@ -109,6 +109,6 @@ ls -la "$TMP_DIR"
 # 构建 docker 镜像（以工作区根目录为构建上下文）
 IMAGE_TAG="dolphinscheduler:${VERSION}-standalone-py-datax-aliyunpan-${ARCH}"
 echo "开始构建镜像: $IMAGE_TAG 使用 Dockerfile: $DOCKERFILE"
-docker build -t "$IMAGE_TAG" -f "$DOCKERFILE" .
+sudo docker build -t "$IMAGE_TAG" -f "$DOCKERFILE" .
 
 echo "构建完成: $IMAGE_TAG"
