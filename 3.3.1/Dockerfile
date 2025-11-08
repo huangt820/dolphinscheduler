@@ -22,7 +22,7 @@ COPY ./3.3.1/mvn/wrapper ./.mvn/wrapper/
 COPY ./libs/mysql-connector-j-9.4.0.jar ./standalone-server/libs/
 COPY ./3.3.1/plugins ./plugins
 
-# 禁用90%负载保护机制
+# 调整线程数等
 COPY ./3.3.1/conf/application.yaml ./standalone-server/conf/
 
 # 环境变量

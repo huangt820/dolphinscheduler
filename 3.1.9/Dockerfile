@@ -17,6 +17,9 @@ WORKDIR /opt/dolphinscheduler
 # 安装插件
 COPY ./libs/mysql-connector-j-9.4.0.jar ./libs/standalone-server/
 
+# 调整线程数等
+COPY ./3.1.9/conf/application.yaml ./conf/
+
 # 环境变量
 ENV PYTHON_LAUNCHER=/usr/bin/python3
 ENV DATAX_LAUNCHER=/opt/datax/bin/datax.py
