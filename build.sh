@@ -47,9 +47,9 @@ if [ ! -f "$DOCKERFILE" ]; then
     exit 4
 fi
 
-# 解压 aliyunpan 目录下的 amd|arm zip 到 /tmp/dolphinscheduler/build/aliyunpan/
+# 解压 aliyunpan 目录下的 amd|arm zip 到 /tmp/dolphinscheduler/build/image/aliyunpan/
 
-TMP_DIR="/tmp/dolphinscheduler/build/aliyunpan"
+TMP_DIR="/tmp/dolphinscheduler/build/image/aliyunpan"
 echo "准备临时目录: $TMP_DIR"
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR"
